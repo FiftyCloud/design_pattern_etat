@@ -48,7 +48,7 @@ Toutes les classes doivent implémenter la même interface de façon à pouvoir 
 
 ## Mise en place et implémentation ##
 
-Nous allons créeer un classe qui va prendre le rôle du contexte : 
+Nous allons créer une classe qui va prendre le rôle du contexte : 
 
 
 ```c#
@@ -94,7 +94,7 @@ public abstract class State
 }
 ```
 
-Pour chaque état, nous créons une classe qui dérive de l’interface état. Contenant le code qui concerne cet état.
+Pour chaque état, nous créons une classe qui dérive de cette classe abstraite. Contenant le code qui concerne cet état.
 ```csharp
 public class ConcreteStateA : State
 {
