@@ -31,7 +31,7 @@ La première idée qui pourrait venir en tête pour résoudre ce problème serai
     }
 ```
 
-Un nombre important de d'état va venir augmenter la complexité cyclomatique de la solution, c'est-à-dire le nombre de chemins possibles dans une méthode.  
+Un nombre important d'état va venir augmenter la complexité cyclomatique de la solution, c'est-à-dire le nombre de chemins possibles dans une méthode.  
 Aussi la maintenance va devenir lourde lorsqu'il va falloir ajouter de nouveau état et va à l'encontre du deuxième principe SOLID. À savoir celui d'ouvert/fermé (O.C.P) qui précise ceci :
 
 > Les objets ou entités devraient être ouverts à l’extension mais fermés à la modification.  
@@ -154,7 +154,7 @@ Context: Move to ConcreteStateA
 
 ## Conclusion ##
 
-Si le comportement d'un de vos objets est amené a varié en fonction de son état, ce patron de conception peu être un solution afin de respecter les principe SOLID de responsabilité unique et ouvert/fermé.
+Si le comportement d'un de vos objets est amené a varié en fonction de son état, ce patron de conception peu être un solution afin de respecter les principes SOLID de responsabilité unique et ouvert/fermé.
 
 En organisant le code lié aux différents états dans des classes séparées tout en ajoutant de nouveaux états sans modifier les classes état ou le contexte existants.
 
