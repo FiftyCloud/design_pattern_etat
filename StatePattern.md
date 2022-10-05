@@ -5,13 +5,7 @@
 
 ## Enoncé du problème ##
 
- Le client A a besoin un outil de workflow pour la gestion de ses dossiers. Le dossier doit naviguer dans les différents services en fonction de son état.  
- À chaque état, une action lui sera associée de la façon suivante : 
-État | Action associées
-------------- | -------------
-1 | A
-2  |  B
-3 | C
+Vous vous retrouvé a devoir gerer un changement d'état. Selon l'état de vos objets vos actions auront un comportement différent. Ceci est un cas de figure que l'on retrouve fréquement dans nos spécification.
 
 La première idée qui pourrait venir en tête pour résoudre ce problème serait l'implémentation d'un automate fini, en se basant sur un switch, de la façon suivante :
 
@@ -46,7 +40,7 @@ Ainsi l'objet original, qui sera nommé *contexte*, stocke une référence vers 
 
 Toutes les classes doivent implémenter la même interface de façon à pouvoir faire passer le contexte d'un état à un autre, en remplaçant l'objet état par celui qui représente son nouvel état.
 
-## Mise en place et implémentation ##
+##  Cas théorique : exemple d'implémentation ##
 
 Nous allons créer une classe qui va prendre le rôle du contexte : 
 
@@ -151,6 +145,71 @@ Context: Move to ConcreteStateC
 ConcreteStateC wants to change the state of the context.
 Context: Move to ConcreteStateA
 ```
+
+## Cas concret : Le lecteur audio ##
+
+Partons du principe que nous avons un lecteur audio avec 3 boutons qui correspondent a 3 actions possible pour l'utilisateur :
+- Retour arrière : "<"
+- Play/Pause : "P"
+- Avance rapide : ">"
+
+Néamoins le comportement de ses actions sera différente selon l'état du lecteur. Nous allons commencer par 4 etats :
+- Lecture
+- Pause
+- Avance rapide
+- Rembobine
+
+Reprennons l'exercice précédent. Nous commençons par creer notre context de notre lecture, qui reprendra nos 3 actions possibles.
+
+```c#
+using System;
+
+public class ReaderContext
+{
+    // Reference to the current state of the Context
+    private State _state = null;
+
+    public Context(State state)
+    {
+         this._state = state;
+    }
+
+    public void Rewind()
+    {
+        this._state.Rewind(this);
+    }
+    
+    public void Play()
+    {
+        this._state.Play(this);
+    }
+
+    public void SpeedUp()
+    {
+        this._state.SpeedUp(this);
+    }
+    
+}
+```
+Ensuite notre classe abstaire de la quelle vont dérivé nos états.
+
+```csharp
+public abstract class State
+{
+    protected Context _context;
+
+    public void SetContext(Context context)
+    {
+        this._context = context;
+    }
+
+    public abstract void Rewind();
+    public abstract void Play();
+    public abstract void SpeedUp();
+}
+```
+
+
 
 ## Conclusion ##
 
