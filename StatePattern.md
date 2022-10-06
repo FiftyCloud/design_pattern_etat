@@ -148,65 +148,78 @@ Context: Move to ConcreteStateA
 
 ## Cas concret : Le lecteur audio ##
 
-Partons du principe que nous avons un lecteur audio avec 3 boutons qui correspondent a 3 actions possible pour l'utilisateur :
-- Retour arrière : "<"
-- Play/Pause : "P"
-- Avance rapide : ">"
+Partons du principe que nous avons un lecteur audio avec 1 boutons qui correspondent a 1 actions possible pour l'utilisateur :
+- Play : "P"
 
-Néamoins le comportement de ses actions sera différente selon l'état du lecteur. Nous allons commencer par 4 etats :
+
+Néamoins le comportement de ses actions sera différente selon l'état du lecteur. Nous allons commencer par 2 etats :
 - Lecture
 - Pause
-- Avance rapide
-- Rembobine
 
-Reprennons l'exercice précédent. Nous commençons par creer notre context de notre lecture, qui reprendra nos 3 actions possibles.
+
+Reprennons l'exercice précédent. Nous commençons par creer notre context (ici nommé Reader) de notre lecture, qui reprendra notre actions.
 
 ```c#
 using System;
 
-public class ReaderContext
+public class Reader
 {
-    // Reference to the current state of the Context
-    private State _state = null;
+    // Reference to the current state of the Reader
+    private ReaderState _state = null;
 
-    public Context(State state)
+    public Reader(ReaderState state)
     {
          this._state = state;
     }
 
-    public void Rewind()
-    {
-        this._state.Rewind(this);
-    }
     
-    public void Play()
+    public void PressPlay()
     {
-        this._state.Play(this);
+        this._state.PressPlay(this);
     }
 
-    public void SpeedUp()
+    public ReaderState CurrentState
     {
-        this._state.SpeedUp(this);
+        get { return _state; }
+        set { _state = value; }
     }
     
 }
 ```
-Ensuite notre classe abstaire de la quelle vont dérivé nos états.
+Ensuite notre classe abstaire d'état ainsi que nos deux classe concréte concernant l'état de lecture et de pause.
 
 ```csharp
-public abstract class State
+public abstract class ReaderState
 {
-    protected Context _context;
+    public abstract void PressPlay(Reader reader);
+}
 
-    public void SetContext(Context context)
+public class ReaderPlayingState : ReaderState
+{
+    public ReaderPlayingState()
     {
-        this._context = context;
+        Console.WriteLine("Reader playing");
     }
 
-    public abstract void Rewind();
-    public abstract void Play();
-    public abstract void SpeedUp();
+    public override void PressPlay(Reader reader)
+    {
+        reader.CurrentState = new ReaaderPausedState();
+    }
 }
+
+public class ReaderPausedState : ReaderState
+{
+    public ReaderPlayingState()
+    {
+        Console.WriteLine("Reader paused");
+    }
+
+    public override void PressPlay(Reader reader)
+    {
+        reader.CurrentState = new ReaaderPausedState();
+    }
+}
+
 ```
 
 
