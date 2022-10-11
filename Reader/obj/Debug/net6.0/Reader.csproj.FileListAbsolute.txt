@@ -1,0 +1,15 @@
+C:\Factory\Articles\Reader\obj\Debug\net6.0\Reader.csproj.AssemblyReference.cache
+C:\Factory\Articles\Reader\obj\Debug\net6.0\Reader.GeneratedMSBuildEditorConfig.editorconfig
+C:\Factory\Articles\Reader\obj\Debug\net6.0\Reader.AssemblyInfoInputs.cache
+C:\Factory\Articles\Reader\obj\Debug\net6.0\Reader.AssemblyInfo.cs
+C:\Factory\Articles\Reader\obj\Debug\net6.0\Reader.csproj.CoreCompileInputs.cache
+C:\Factory\Articles\Reader\bin\Debug\net6.0\Reader.exe
+C:\Factory\Articles\Reader\bin\Debug\net6.0\Reader.deps.json
+C:\Factory\Articles\Reader\bin\Debug\net6.0\Reader.runtimeconfig.json
+C:\Factory\Articles\Reader\bin\Debug\net6.0\Reader.dll
+C:\Factory\Articles\Reader\bin\Debug\net6.0\Reader.pdb
+C:\Factory\Articles\Reader\obj\Debug\net6.0\Reader.dll
+C:\Factory\Articles\Reader\obj\Debug\net6.0\refint\Reader.dll
+C:\Factory\Articles\Reader\obj\Debug\net6.0\Reader.pdb
+C:\Factory\Articles\Reader\obj\Debug\net6.0\Reader.genruntimeconfig.cache
+C:\Factory\Articles\Reader\obj\Debug\net6.0\ref\Reader.dll

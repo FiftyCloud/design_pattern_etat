@@ -1,6 +1,12 @@
 # Design Pattern d'état #
 
- Le modèle de conception d'état est de type comportemental.  
+Un patron de conception apporte une solution à un problème fréquemment rencontrer en programmation orienté objet. Dans les années 90 le "gang of four" dans son ouvrage "Design Patterns: Elements of Reusable Object-Oriented Software" en a fait ressortir 3 types :
+- Patrons de Création
+- Patrons Comportemental
+- Patrons Structurel
+
+ Le modèle de conception d'état est de type comportemental. 
+
  Le changement d'état de l'objet permet de modifier son comportement.
 
 ## Enoncé du problème ##
@@ -203,25 +209,68 @@ public class ReaderPlayingState : ReaderState
 
     public override void PressPlay(Reader reader)
     {
-        reader.CurrentState = new ReaaderPausedState();
+        reader.CurrentState = new ReaderPausedState();
     }
 }
 
 public class ReaderPausedState : ReaderState
 {
-    public ReaderPlayingState()
+    public ReaderPausedState()
     {
         Console.WriteLine("Reader paused");
     }
 
     public override void PressPlay(Reader reader)
     {
-        reader.CurrentState = new ReaaderPausedState();
+        reader.CurrentState = new ReaderPlayingState();
     }
 }
 
+
+
 ```
 
+Afin de pouvoir tester notre implementation de façon ludique nous allons rajouter l'action Play/Pause dans le programe.cs à l'aide d'un console.readkey qui va attendre la touche P.
+
+```csharp
+ public class program
+{
+    public static void Main(string[] args)
+    {
+        var reader = new Reader(new ReaderPausedState());
+        ConsoleKeyInfo cki;
+        Console.WriteLine($"Press P to launch : ");
+        do
+        {
+            cki = Console.ReadKey();
+            if(cki.Key.ToString().Equals("P"))
+            {
+                Console.WriteLine($"{Environment.NewLine}");
+                reader.PressPlay();
+            }
+
+        } while (cki.Key != ConsoleKey.Escape);
+    }
+}
+```
+
+Ainsi en appuyant plusieur on obtient le changement d'état suivant : 
+
+```console
+Reader paused
+Press P to launch : 
+P
+
+Reader playing
+P
+
+Reader paused
+P
+
+Reader playing
+```
+
+Si vous souhaitez ajouter de nouveaux état comme une avance rapide il vous suffira d'ajouter la classe concrète correspondant à cette état puis mettre à jours les différentes action selon vos souhait. Tout en respectant facilement les principes SOLID.
 
 
 ## Conclusion ##
